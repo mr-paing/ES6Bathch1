@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        const students = {
+            name : "Aung Kyaw",
+            age: 15,
+            subject : ["myanmar","english","math","chemistry","physic","biology"]
+        };
+
+        const htmlone = `
+            <div>
+               <h3>${students.name} </h3> 
+               <p> ${students.age} </p>
+               <ul>
+                    <li>${students.subject[0]} </li>
+                    <li>${students.subject[1]} </li>
+                    <li>${students.subject[2]} </li>
+                    <li>${students.subject[3]} </li>
+                    <li>${students.subject[4]} </li>
+                    <li>${students.subject[5]} </li>
+                </ul>
+                
+                </div>
+        `;
+
+        document.write(htmlone);
+
+
+        function myrender(courses){
+            return `
+                <ul>
+                    ${courses.map(course=>`<li> ${course} </li>`).join('')}
+                </ul>
+            `;
+        };
+
+        const htmltwo= `
+            <div>
+               <h3>${students.name} </h3> 
+               <p> ${students.age} </p>
+               <ul>
+                    
+                ${myrender(students.subject)}
+        `;
+
+        document.write(htmltwo);
+    </script>
+</body>
+</html>

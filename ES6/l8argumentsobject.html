@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Arguments Object</title>
+    </head>
+    <body>
+        
+        <script type="text/javascript">
+            // Arguments Object
+
+            // Note:: arguments object can't set in Arrow Function
+
+            // Arguments means given parameter
+
+            function getname(first,last){
+                console.log(first,last);
+            }
+
+            getname("aung","kyaw"); //aung kyaw
+
+            function getfullname(first,last){
+                console.log(arguments); //Arguments(2) ['Aung', 'Kyaw', callee: ƒ, Symbol(Symbol.iterator): ƒ]
+                console.log(typeof arguments); //objects
+                console.log(arguments[0]); //Aung
+                console.log(arguments[1]); //Kyaw
+            }
+
+            getfullname("Aung","Kyaw");
+
+
+// arguments can do without parameter in regular function , and also this key_word can work regular function
+            function getcountry(){
+                console.log(arguments);
+                console.log(arguments[0]);
+            }
+            getcountry("Thailand");
+
+// Error
+// Note:: arguments object can't set in Arrow Function
+
+            // let getcity = ()=>{
+            //     console.log(arguments);
+            // }
+            // getcity(); //Uncaught ReferenceError: arguments is not defined
+            // getcity("Indonesia"); //Uncaught ReferenceError: arguments is not defined
+
+
+            function getnumber(){
+                // console.log(arguments);
+                let result = 0;
+
+                for(const val of arguments){
+                    result += val;
+                }   
+                return result;
+            }
+            console.log(getnumber(10,20,30,40,50)); //150
+
+
+            let amount = [10,20,30,40,50];
+            function totalresult(){
+                let total = 0;
+                for(let x = 0; x < arguments.length; x++ ){
+                    total += arguments[x];
+                }
+                return total;
+            }
+
+            console.log(totalresult(10,20,30,40,50)); //150
+            console.log(totalresult(...amount)); //150
+            console.log(totalresult(...[10,20,30,40,50])); //150
+
+
+        // =>Error
+            // function sumresult(){
+            //     let sum = arguments.reduce((total,curr)=>(total += curr),0);
+            //     return sum;
+            // }
+
+            // console.log(sumresult(10,20,30,40,50));
+
+
+
+            function sumresult(){
+                // let sum = arguments.reduce((total,curr)=>(total += curr),0);
+                let sum = Array.from(arguments);
+                let result = sum.reduce((total,curr)=>(total += curr),0);
+                return result;
+            }
+
+            console.log(sumresult(10,20,30,40,50)); //150
+
+        </script>
+    </body>
+</html>
+
+<!-- htmlcollection & arguments are can't loop -->
+

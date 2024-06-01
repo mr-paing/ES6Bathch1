@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>revision</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        
+        const Computer = new Function('brand,price',`
+
+            this.madeby = brand,
+            this.saleprice = price,
+
+            this.ilike = function(){
+                return "I like any computer."
+            }
+
+        `);
+
+        const getcomputer = new Computer('Dell','2000$');
+        console.log(getcomputer);
+        console.log(getcomputer.madeby);
+        console.log(getcomputer.saleprice);
+        console.log(getcomputer.ilike());
+        console.log(typeof getcomputer.ilike);
+
+
+        for(let key in getcomputer){
+            // console.log(key);
+            // console.log(getcomputer[key]);
+
+            if(typeof getcomputer[key] !== "function"){
+                console.log(getcomputer[key]);
+            }
+        }
+
+        // for(let key in getcomputer) console.log(getcomputer[key]);
+
+
+        if("brand" in getcomputer){
+            console.log('Yes');
+        }else{
+            console.log("no");
+        }
+
+    </script>
+</body>
+</html>

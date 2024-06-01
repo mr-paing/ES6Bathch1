@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rest Parameter / Rest Operator</title>
+    </head>
+    <body>
+        
+        <script type="text/javascript">
+            // Rest Parameter(...) rest param ကို multi value ဖြစ်လှျင် ေနာက်ဆုံးမှာသာ ေပးရမည်၊ တစ်ခုထက်ပို၍ မေပးရ၊ အစ အလယ်တို့၌ မေပးရ။
+
+            // Note : Can't set first and between
+            //     : Can contain just one rest parameter and must be last
+
+            function city(val){
+                return val;
+            }
+            console.log(city()); //undefined
+            console.log(city("Yangon")); //Yangon
+            console.log(city("Yangon","Mandalay","Bago")); //Yangon
+
+            function country(...vals){
+                return vals;
+            }
+            console.log(country()); //[]
+            console.log(country("Myanmar")); //['Myanmar']
+            console.log(country("Myanmar","Thailand","Indonesia")); //(3) ['Myanmar', 'Thailand', 'Indonesia']
+
+            function place(location,...val){
+                // return location; //Chaung Tar
+                return val; //(2) ['Ngapali', 'Ngwesaung']
+            }
+            console.log(place("Chaung Tar","Ngapali","Ngwesaung"));
+
+// single parameter ဆိုလှျင် string ဖြင့်ေရးရမည်။ သတိပြု
+            let animal = new Function("...vals","return vals");
+            console.log(animal("cat","dog","fish")); //(3) ['cat', 'dog', 'fish']
+
+
+            function sumresult(...nums){
+                let total = 0;
+                for(const num of nums){
+                    total += num;
+                }
+                return total;
+            }
+
+            console.log(sumresult(10,20,30,40,50)); // 150
+            console.log(sumresult([10,20,30,40,50])); // doesn't work with array | 010,20,30,40,50
+
+
+
+            function getinfo(first,last,...city){
+                console.log("firstname is = ",first);
+                console.log("lastname is = ",last);
+                console.log("city is = ",city);
+            }
+
+            getinfo(); // firstname is =  undefined lastname is =  undefined city is =  []
+            getinfo("aung","kyaw","yangon"); //firstname is =  aung lastname is =  kyaw city is =  ['yangon']
+            getinfo("aung","kyaw","yangon","myanmar","asia"); // firstname is =  aung lastname is =  kyaw city is =  (3) ['yangon', 'myanmar', 'asia']
+
+
+
+
+            function exampleone(num1,num2,num3){
+                console.log(num1,num2,num3);
+            }
+
+            exampleone(10,20,30); //10 20 30
+
+            function exampletwo(num1,num2,...num3){
+                console.log(num1,num2,num3);
+            }
+
+            exampletwo(10,20,30); //10 20 [30]
+            exampletwo(10,20,30,40,50); //10 20 (3) [30, 40, 50]
+
+
+            // Error 
+            // function examplethree(...num1,num2,num3){
+            //     console.log(num1,num2,num3);
+            // }
+
+            // examplethree(10,20,30); //Uncaught SyntaxError: Rest parameter must be last formal 
+
+
+            // Error 
+            // function examplefour(num1,...num2,num3){
+            //     console.log(num1,num2,num3);
+            // }
+
+            // examplefour(10,20,30); //Uncaught SyntaxError: Rest parameter must be last formal 
+
+
+
+
+            function example(num1,num2,...num3){
+                console.log(num1,num2,num3);
+            }
+            example(10,20,30,40,50,60);
+
+            function sumtotal(...sums){
+                let total = 0;
+                for(const sum of sums){
+                    total += sum;
+                }
+                return total;
+            }
+
+            console.log(sumtotal(10,20,30,40,50,60)); //210
+            console.log(sumtotal([10,20,30,40,50,60])); //does't work with array : 010,20,30,40,50,60
+
+
+
+            function totalresult(...nums){
+                const total = nums.reduce((total,curr)=>total+curr,0);
+                return total;
+            };
+
+            console.log(totalresult(10,20,30,40,50));
+
+
+            
+
+        </script>
+    </body>
+</html>

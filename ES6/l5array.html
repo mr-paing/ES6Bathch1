@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Array</title>
+    </head>
+    <body>
+        
+        <script type="text/javascript">
+
+            const myarrs = [100,200,300,400,500];
+            const num1 = myarrs[0];
+            const num2 = myarrs[1]
+            console.log(num1); //100
+            console.log(num2); //200
+
+            const [val1,val2,val3,val4,val5] = myarrs;
+            console.log(val1);
+            console.log(val2);
+            console.log(val3);
+            console.log(val4);
+            console.log(val5);
+
+
+            
+            // => Array 
+            let male = "Aung Aung";
+            let female = "Su Su";
+            console.log(male,female); // Aung Aung Su Su
+
+            [male,female] = [female,male];
+            console.log(male,female); //Su Su Aung Aung
+
+
+            let colors = ["red","blue","green","white","black"];
+            console.log(colors); //(5) ['red', 'blue', 'green', 'white', 'black']
+            console.log(colors[0]); //red
+            console.log(colors[1]); //blue
+            console.log(colors[3]); //white
+
+// array ကို looping ပတ်လိုလှျင် for of loop သည် ပို၍ လွယ်ကူရိုးရှင်းသည်။
+// const ကို for in loop & for of loop တို့တွင် အသုံးပြု၍ ရသည်။ for loop & forEach loop တို့တွင် သုံးမရ
+            for(const color of colors){
+                console.log(color);
+            };
+// entries() နဲ့ထုတ်လှျင် တိုက်ရိုက် value မထွက်ေသးပဲ ကြားထဲတွင် array တခုကျန်ေနေသးသည်။ generator function သည် value direct ထွက်သည်။
+            const arrs = colors.entries();
+            // console.log(arrs); //Array Iterator {}
+            // console.log(arrs.next()); //{value: Array(2), done: false}
+            // console.log(arrs.next());
+            // console.log(arrs.next());
+            // console.log(arrs.next());
+            // console.log(arrs.next());
+            // console.log(arrs.next());
+
+            for(const color of arrs){
+                // console.log(color);
+                console.log(color[0],color[1]);
+            };
+
+            for(const [idx,color] of colors.entries()){
+                console.log(`Index is ${idx} = value is ${color}`);
+            };
+
+            const staffs = ["aung aung","maung maung","kyaw kyaw","zaw zaw","turn tun"];
+            console.log(staffs);
+            console.log(typeof staffs);
+
+// [Symbol.iterator]() 
+            const employees = staffs[Symbol.iterator]();
+            console.log(employees);
+
+            // console.log(employees.next()); //{value: 'aung aung', done: false}
+            // console.log(employees.next()); //{value: 'maung maung', done: false}
+            // console.log(employees.next()); //{value: 'kyaw kyaw', done: false}
+            // console.log(employees.next()); //{value: 'zaw zaw', done: false}
+            // console.log(employees.next()); //{value: 'turn tun', done: false}
+            // console.log(employees.next()); //{value: undefined, done: true}
+
+            for(const employee of employees){
+                console.log(employee);
+            }
+            
+
+
+
+
+        </script>
+    </body>
+</html>

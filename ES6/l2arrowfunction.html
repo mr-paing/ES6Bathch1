@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Arrow Function</title>
+    </head>
+    <body>
+        
+        <script type="text/javascript">
+            
+            //Template Literals
+            let num1 = 100;
+            let num2 = 200;
+            console.log(`${num1 + num2}`); //300
+            console.log(num1 > num2 ? "Yes" : "No"); // No
+
+            //=> Function()
+            let getfullname = function(){
+                let firstname = "Aung";
+                let lastname = "Tun Tun";
+                return `${firstname} ${lastname}`;
+            }
+
+            console.log(getfullname());
+
+            let firstname = "Ma Ma";
+            let lastname = " Mya";
+            let getnickname = (fstname,lstname)=>fstname + " " + lstname;
+                getnickname = (fstname,lstname)=>(`${fstname} ${lstname}`);
+                getnickname = (fstname,lstname)=>`${fstname} ${lstname}`;
+            console.log(getnickname(firstname,lastname));
+
+
+            // const sayname = name=>{
+            //     alert(`${name}`);
+            // };
+            // console.log(sayname('Maung Maung'));
+
+            // const saycity = (city)=>alert(`Hello ${city}`);
+            // console.log(saycity("Mandalay"));
+
+            // Note::no need round_bracket if it's single parameter
+            // const phonenumber = phone=>alert(`My phonenumber is ${phone}`);
+            // phonenumber("09111111111");
+
+            const getnum = ()=>{
+                let num1 = 200;
+                return num1;
+            };
+            console.log(getnum());
+
+
+            const getnumber = (num1=100,num2=200)=>{
+                let result = num1 + num2;
+                return result;
+            };
+            console.log(getnumber(10,50)); //60
+            console.log(getnumber(10)); //210
+            console.log(getnumber()); //300
+
+
+        </script>
+    </body>
+</html>

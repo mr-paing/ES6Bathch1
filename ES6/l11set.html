@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set</title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+
+        const info = {
+            name : "su su",
+            age : 20,
+            city : "Yangon"
+        }
+
+        console.log(info);
+        // console.log(typeof names);   
+        console.log(info.size);
+        
+// in this set() method , it must to use size instead of length
+
+        const names = new Set();
+        console.log(names);
+        console.log(typeof names ); //object
+
+        names.add("aung aung");
+        names.add("Kyaw kayw");
+        names.add("yu yu").add('nu nu').add('yu par');
+        
+        console.log(names);
+        console.log(names.length);
+        console.log(names.size);
+
+
+        console.log(names[0]); //undefined
+
+        names.forEach(name=>{
+            console.log(name);
+        })
+
+        console.log(names[Symbol.iterator]());
+        console.log(names[Symbol.iterator]().next()); //{value: 'aung aung', done: false}
+        console.log(names[Symbol.iterator]().next().value); //aung aung
+        console.log(names[Symbol.iterator]().next().value); //aung aung
+        console.log(names[Symbol.iterator]().next().value); //aung aung
+
+        const getnames = names[Symbol.iterator](); 
+        console.log(getnames); //SetIterator {'aung aung', 'Kyaw kayw', 'yu yu', 'nu nu', 'yu par'}
+        console.log(getnames.next().value); //aung aung
+        console.log(getnames.next().value); // kyaw kyaw
+        console.log(getnames.next().value); //yu yu
+        console.log(getnames.next().value); // nu nu
+        console.log(getnames.next().value); //yu par
+        console.log(getnames.next().value); //undefined
+
+        let students = new Set();
+        students.add("hla hla").add('mya mya').add('ywal ywal');
+        students.add("nilar").add('hla hla').add('Ywal Ywal');
+        console.log(students); //Set(5) {'hla hla', 'mya mya', 'ywal ywal', 'nilar', 'Ywal Ywal'}   
+        console.log(students.size); //5
+
+        console.log(students.has("nilar")); //true
+        console.log(students.has("Nilar")); //false
+        console.log(students.has("hla")); // false
+
+        console.log(students.delete("mya mya")); //true
+
+        console.log(students); //Set(4) {'hla hla', 'ywal ywal', 'nilar', 'Ywal Ywal'}
+        console.log(students.size); //4
+
+        students.clear();
+
+        console.log(students); // Set(0) {size: 0}
+        console.log(students.size); // 0
+
+
+
+
+
+        // => Set () to Array 
+        const customers = ["yu yu","nu nu","ma ma"];
+        console.log(customers);
+
+        const vipcustomers  = new Set(customers);
+        console.log(vipcustomers); //Set(3) {'yu yu', 'nu nu', 'ma ma'}
+
+        // Method 1
+        const vipmembers = Array.from(vipcustomers);
+        console.log(vipmembers); //(3) ['yu yu', 'nu nu', 'ma ma']
+
+        // Method 2
+        const bigcustomers = [...vipcustomers];
+        console.log(bigcustomers); //(3) ['yu yu', 'nu nu', 'ma ma']
+        console.log(bigcustomers.length); //3
+        console.log(bigcustomers[0]); //yu yu
+
+
+
+    </script>
+</body>
+</html>

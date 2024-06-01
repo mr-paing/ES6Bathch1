@@ -1,0 +1,409 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title>Iteration</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            //Array Call Back Method
+
+            //  forEach
+            //  map 
+            //  filter
+
+            //  reduce 
+            //  includes
+            //  some 
+            //  every 
+            //  find 
+
+            // for(let x = 0; x < array.length; x++){
+            //     code to be exceuted
+            // };
+
+            // for(let key in obj){
+            //     code to be excuted
+            // };
+
+            // for(let value of array){
+            //     code to be excuted
+            // };
+
+//=> for loop
+            document.write("<h3>For Loop</h3>");
+
+            let mycolors = ["red","blue","grey","skyblue","green"];
+
+            for(let x = 0;x < mycolors.length; x++){
+                document.write(mycolors[x]+"<br/>");
+            };
+
+//=> for in loop
+            document.write("<h3> For In Loop </h3>"); //Especially use Object,and also use array
+
+            const customers = {
+                name : "U Ba",
+                city : "Yangon",
+                phone : "09123456789"
+            };
+
+            // console.log(customers);
+            // console.log(customers.name); //dot notation
+            // console.log(customers['name']); //bracket notation
+
+            for(let key in customers){
+                // document.write(key);
+                // document.write(customers.key); //undefined
+                // document.write(customers[key]);
+
+                document.write(key + " = " + customers[key] + "<br/>");
+            };
+
+            const ourteams = ["kyaw kyaw","zaw zaw","maw maw" , "hla hla"];
+            for(idx in ourteams ){
+                // document.write(idx);
+                document.write("For in Loop result = " + ourteams[idx] + "<br/>");
+            };
+
+
+// => for of loop
+            document.write("<h3> For of Loop </h3> "); // for array
+
+            const members = ["su su","nu nu","mya mya","min min","lin lin"];
+            for(let member of members ){
+                // console.log(member);
+                document.write("For of loop result = " + member + "<br/>");
+            };
+
+
+// foreach loop
+            document.write("<h3>forEach Loop</h3>"); 
+            const students = ["pa pa","hla hla","mya mya","ko ko","zaw zaw"];
+            students.forEach(student=>{
+                // console.log(student);
+                document.write("forEach Loop result = " + student + "<br/>");
+            });
+
+    // need to add round_bracket if it's multi parameter 
+            const colors = ["blue","tomato","grey","red","bround"];
+            colors.forEach((color,idx)=>{
+                // console.log(`Idex number is = ${idx} Color is = ${color}`);
+                document.write(`Idex number is = ${idx} , Color is = ${color} <br/>`);
+            });
+
+
+//=> map loop // # Note :: console ထုတ်လျှင် string ဖြင့်ထွက်သည်။ return ပြန်လျှင် array ဖြင့်ထွက်သည်။ ဤ map သည် array ကို ပြန်လည်၍ ထပ်ေပါင်းဖြည့်စွက်လိုေသာအခါတွင် သုံးသည်။
+// map loop သည် forEach loop ဖြင့် အနည်းငယ်ေရးထုံးဆင်တူသည်။ 
+// map သည် forEach ထက် အလုပ်လုပ်နိုင်စွမ်းပိုမြင့်သည်။
+
+    // Very important to know
+            document.write("<h3>map Loop</h3>");
+            const employees = ["lu lu","nu nu","pa pa","hla hla","mya mya"];
+// console ထုတ်လျှင် string ဖြင့်ထွက် 
+            employees.map(employee=>{
+                // console.log(employee); //string
+                document.write("map loop result = " + employee + "<br/>");
+            });
+
+
+// the result is array to add more any you want, it's very useful
+
+// retrun ပြန်လျှင် array ဖြင့်ထွက်
+            const ladies = employees.map((employee,idx)=>{
+                // return idx; //(5) [0, 1, 2, 3, 4]
+                // return employee; //(5) ['lu lu', 'nu nu', 'pa pa', 'hla hla', 'mya mya']
+
+// need to return multi line 
+// array ကို ထပ်ေပါင်းဖြည့်စွပ်ပုံ
+                return `${++idx}. Ms.${employee}`;
+            });
+            console.log(ladies); // ['1. Ms.lu lu', '2. Ms.nu nu', '3. Ms.pa pa', '4. Ms.hla hla', '5. Ms.mya mya']
+
+// no need to return if it's single line
+            const visitors = ["min thu","kaw zay ya","pyae zaw","lin aung"];
+
+
+// single line ဆိုလျှင် return ပြန်ဖွယ် မလို 
+            const guys = visitors.map(visitor=>`Mr.${visitor}`);
+            console.log(guys); // array
+
+// forEach ဖြင့်လည်း ထပ်ေပါင်းထဲ့၍ ရသည်၊  သို့ေသာ် - string ဖြင့်သာထွက်သည်။ 
+            visitors.forEach(visitor=>{
+                console.log(`forEach result = Mr.${visitor}`); // string
+            });
+
+
+// forEach & map တို့၏ အဓိက ကွဲပြားခြားနားချက်မှာ map သည် variable တစ်ခုထဲ ထည့်ေပးပြီး return ပြန်ေပးလို့ရသည်၊ forEach သည် မရ။
+
+            // can't set!!! forEach not working
+            // const peoples = visitors.forEach(visitor=>{
+            //     return `Mr.${visitor}`;
+            // });
+            // console.log(peoples); //undefined
+
+            const employers = ["lu lu","pa pa","nu nu","pu pu","su su"];
+            // method 1
+            const arrs1 = employers.map(employer=>{
+                return employer;
+            });
+            console.log(arrs1);
+
+            const arrs2 = arrs1.filter(arr1=>{
+                if(arr1 === "nu nu"){
+                    return false;
+                }else{
+                    return true;
+                }
+            });
+            console.log(arrs2);
+
+
+            // method 2
+            const owners = employers.map(employer=>{
+                return employer;
+            }).filter(owner=>{
+
+                // if(owner === "nu nu"){
+                //     return false;
+                // }else{
+                //     return true;
+                // };
+
+                if(owner === "nu nu"){
+                    return false;
+                }
+                
+                return true;
+
+            });
+            console.log(owners);
+
+
+            const firstnames = ["aung","kyaw","soe"];
+
+            const name1 = firstnames.map(firstname=>{
+                return `${firstname} ko ko`;
+            });
+            console.log(name1);
+
+            const name2 = firstnames.map((firstname)=>{
+                return `${firstname} hla`;
+            });
+            console.log(name2);
+
+            const name3 = firstnames.map(firstname=>`${firstname} lwin`);
+            console.log(name3);
+
+            const name4 = firstnames.map(()=>"su su"); //(3) ['su su', 'su su', 'su su']
+            console.log(name4);
+
+            const sport = "bite";
+            const contestants = ["aung aung","kyaw swa","lwin moe","maung maung","ko ko"];
+            const winners = contestants.map((contestant,idx)=>({
+                name:contestant,
+                // game:sport,                     //game:sport
+                sport,                              //sport:bike
+                prize:++idx
+            }));
+            console.log(winners);
+
+
+//=> filter 
+            document.write("<h3>Filter</h3>");
+            const ages = [10,30,15,20,32,22,21,17,27,25,29,18];
+            const over18 = ages.filter(age=>{
+                return age > 18;
+            });
+            // console.log(over18);
+            document.write("Filter result = "+ over18);
+
+            // for single line
+            const over20 = ages.filter(age=>age >= 20);
+            console.log(over20);
+
+
+// => reduce (array ထဲတွင်ရှိေသာ value များကို calculate လုပ်၍ အေဖြထုတ်ေပး)
+
+            // mainarrays.reduce(function(previousValue,currentValue,currentIndex,array){},initialvalue or additional value);
+            const amounts = [10,20,30];
+            const result = amounts.reduce(function(total,curr){
+                // return total += curr;
+                total += curr;
+                return total;
+            },0); //init value သည် 0 ဖြစ်ရမည်၊ ထပ်ေပါင်းချင်တာမျိုးဆိုမှသာ 1 , 2 စသည်ထည့်ေပးရမည်။ မေပးလည်းရသည်, defautl value သည် 0 ဖြစ်သည်။
+            console.log(result); //60
+
+            const sumresult = amounts.reduce((total,curr)=>(total += curr),0).toFixed(2); //sperator အတွက် toFixed() ကိုသုံး
+            console.log(sumresult); // 60.00
+            console.log(typeof sumresult); //string
+
+
+            const numbers = [10,200,20,30,40,50,60,70,80,90,100,500,0];
+            const getresult = numbers.reduce((prev,curr)=>{
+
+            //Exercise 1 = get max
+
+                // if(curr > prev){
+                //     return curr;
+                // }
+                // return prev;
+
+            //Exercise 2 = get min
+
+                if(curr < prev){
+                    return curr;
+                }
+                return prev;
+            },0);
+
+            console.log(getresult);
+
+
+            // max     curr    return 
+            // 10      10        10
+            // 10      200       200
+            // 200     20        200
+            // 200     30        200
+            // 200     40        200.....
+            // 200     500       500
+            // 500     0         500
+
+
+// => includes() return boolean 
+
+            const animals = ['cat','dog','fish','owl','monkey',500,1000];
+            console.log(animals.includes('dog'));  //true
+            console.log(animals.includes('Dog')); //false
+            console.log(animals.includes('do')); // false
+            console.log(animals.includes('owl')); //true
+            console.log(animals.includes(500)); //true
+            console.log(animals.includes('1000')); //false
+
+
+
+            const articals = [
+                {
+                    title:'this is new artical 1',
+                    author:'u ba',
+                    rating:2.8,
+                    types:['book','e-book','cd']
+                },
+                {
+                    title:'this is new artical 2',
+                    author:'u hla',
+                    rating:4.3,
+                    types:['book','cd']
+                },
+                {
+                    title:'this is artical 3',
+                    author:'daw mya',
+                    rating:4.5,
+                    types:['book','e-book','cd']
+                },
+                {
+                    title:'this is artical 4',
+                    author:'daw pa',
+                    rating:3.1,
+                    types:['e-book','cd']
+                }
+            ];
+
+
+
+            const goodratings = articals.filter(artical=>artical.rating > 4);
+            console.log(goodratings);
+
+
+            const goodbooks = articals.filter(artical=>{
+                const result = artical.types.includes('book');
+                return result;
+            });
+
+            console.log(goodbooks);
+
+
+
+// => every() & some() return boolean
+// every() သည် အားလုံးဖြစ်မှ ရသည်၊ some() သည် တချို့တဝက်ဖြစ်ယုံမှျ ဖြင့် ရသည်။
+
+            const boys = ['aung aung','kyaw aung','zin maung','soe naung'];
+
+            const checklength = boys.every(boy=>{
+                return boy.length === 9;
+            });
+
+            console.log(checklength); //true;
+
+            const firstletterwitha = boys.every(boy=>boy[0] === 'a');
+            console.log(firstletterwitha); //false
+
+            const lastletterwithg = boys.every(boy=>boy[boy.length-1] === 'g');
+            console.log(lastletterwithg); //true
+
+
+            const fstletterwitha = boys.some(boy=>boy[0] === 'a');
+            console.log(fstletterwitha); // true
+
+
+
+// => find() & filter()
+            document.write("<h3>find() method</h3>");
+
+            const users = [
+                {name:"Aung Aung",age:20},
+                {name:"Kyaw Kyaw",age:21},
+                {name:"Tun Tun",age:22},
+                {name:"Zaw Zaw",age:23},
+                {name:"Linn Linn",age:24}
+            ];
+
+            const filterresult = users.filter(function(user){
+                return user.name === "Zaw Zaw";
+            });
+
+            console.log(filterresult); // [{…}]
+
+
+
+            const findresult = users.find(function(user){
+                return user.name === "Zaw Zaw";
+            });
+
+            console.log(findresult); // {name: 'Zaw Zaw', age: 23}
+
+
+
+            const filterbyage = users.filter(function(user){
+                return user.age > 22;
+            });
+
+            console.log(filterbyage); // (2) [{…}, {…}]
+
+
+            const findbyage = users.find(function(user){
+                return user.age > 22;
+            });
+            console.log(findbyage);  // {name: 'Zaw Zaw', age: 23} , Note:: result is only one, dute to one time return
+
+
+            const posts = [
+                {id:1,title:"New Post One"},
+                {id:2,title:"New Post Two"},
+                {id:3,title:"New Post Three"}
+            ];
+
+            const comment = {post_id:1,message:"nice post one",user_id:10};
+
+            function postcomment(posts,comment){
+                return posts.find(function(post){
+                    return post.id === comment.post_id;
+                });
+            }
+
+            console.log(postcomment(posts,comment));  // {id: 1, title: 'New Post One'}
+
+            
+
+        </script>
+    </body>
+</html>

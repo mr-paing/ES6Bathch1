@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spread Operator</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            // Spread Operator [array ကို number,string,.... သို့ေပြာင်းသည်။]
+            // rest param က ေတာင်းတာ ၊ spread operator က ပို့တာ။
+            // array ကိုပို့လိုက် ေသာအခါ number များဖြင့် ထွက်လာသည်။
+
+            let val;
+            val = Math.max(1,3,5,7,9,11,13,15,17,19,-20,0);
+            console.log(val); //19
+
+            val = Math.min(1,3,5,7,9,11,13,15,17,19,-20,0);
+            console.log(val); // -20
+
+            val = [10,20,30,40,50];
+            console.log(Math.max(val)); //NaN
+
+            val = [10,20,30,40,50];
+            console.log(Math.min(val)); //NaN
+
+            val = [10,20,30,40,50];
+            console.log(Math.max(...val)); //50
+
+            val = [10,20,30,40,50];
+            console.log(Math.min(...val)); //10
+
+            function sumresult(num1,num2,num3){
+                return num1+num2+num3;
+            }
+
+            console.log(sumresult(1,2,3)); //6
+            console.log(sumresult([1,2,3])); //1,2,3undefinedundefined
+
+            const number = [10,20,30];
+            console.log(sumresult(number)); //10,20,30undefinedundefined
+
+// you can use .apply() method instead of ... sperad operator. it must have 2 parameter but first prarameter is optional so it include or not ok, if you want to add as a first parameter , it can defined null , true or false . mostly defined null as a first parameter , the second parameter must be array (or) the variable name of array.
+            console.log(sumresult.apply(null,number)); //60
+
+
+            function getval(num1,num2,num3){
+                console.log("Num1 result is = " , num1);
+                console.log("Num2 result is = " ,num2);
+                console.log("Num3 result is = " ,num3);
+            }
+
+            getval("su su","yu yu","nu nu"); //Num1 result is =  su su , Num2 result is =  yu yu , Num3 result is =  nu nu
+            getval(["su su","yu yu","nu nu"]); //Num1 result is =  (3) ['su su', 'yu yu', 'nu nu'] , Num2 result is =  undefined , Num3 result is =  undefined
+            getval(...["su su","yu yu","nu nu"]); //Num1 result is =  su su , Num2 result is =  yu yu , Num3 result is =  nu nu
+            getval.apply(null,["su su","yu yu","nu nu"]); //Num1 result is =  su su , Num2 result is =  yu yu , Num3 result is =  nu nu
+            
+// string is ok because of string is character array. spread operator must be array so number is not ok.
+            const color = "Red";
+            console.log(color); //Red
+            console.log(...color); // R e d
+
+//note : it does't work by number
+            getval(color); //Num1 result is =  Red , Num2 result is =  undefined , Num3 result is =  undefined
+            getval(...color); //Num1 result is =  R , Num2 result is =  e , Num3 result is =  d
+
+
+            console.log([color]); //['Red']
+            console.log(...[color]); //Red
+            console.log(["Red","Blue","Green"]); //(3) ['Red', 'Blue', 'Green']
+            console.log(...["Red","Blue","Green"]); //Red Blue Green
+
+            console.log(...color); //R e d
+            console.log([color]); //['Red']
+            console.log(...[color]); //Red
+            console.log([...color]); //(3) ['R', 'e', 'd']
+            console.log([..."Red"]); //(3) ['R', 'e', 'd']
+            
+            console.log(color.split('')); //(3) ['R', 'e', 'd']
+
+            console.log(["Red","Blue","Green"]); //(3) ['Red', 'Blue', 'Green'] 
+            console.log([..."Red","Blue","Green"]); //(5) ['R', 'e', 'd', 'Blue', 'Green']
+            console.log([..."Red","Blue",..."Green"]); //(9) ['R', 'e', 'd', 'Blue', 'G', 'r', 'e', 'e', 'n']
+
+            console.log([...'123',...'456','70',80,90]); //(9) ['1', '2', '3', '4', '5', '6', '70', 80, 90]
+            console.log([...[123],...[456],...'789','70',80,90]); //(8) [123, 456, '7', '8', '9', '70', 80, 90]
+
+            // spread in array 
+
+            const phone = ["samsung","oppo","apple","xiaomi"];
+            const car = ["suzuki","toyota","mazda"];
+            const computer = ["acer","asus","mac"];
+
+            let myowns = [phone,car,computer];
+            console.log(myowns); //(3) [Array(4), Array(3), Array(3)]
+            
+
+            myowns = [...phone,...car,...computer];
+            console.log(myowns); //(10) ['samsung', 'oppo', 'apple', 'xiaomi', 'suzuki', 'toyota', 'mazda', 'acer', 'asus', 'mac']
+
+
+            // spread in object
+            const infos = {
+                name : "Honey Nay Oo",
+                gender : "Female",
+                age : 22
+            }
+
+            const contacts = {
+                phone : "09111111",
+                city : "Yangon",
+                hascar : true
+            }
+
+            const profiles = {
+                nickname : "Honey",
+                age : 20
+            }
+
+            let bios = infos; //{name: 'Honey Nay Oo', gender: 'Female', age: 22}
+                bios = contacts; //{phone: '09111111', city: 'Yangon', hascar: true}
+
+                bios = {infos,contacts}; //{infos: {…}, contacts: {…}}
+            console.log(bios);
+
+            bios = {...infos,...contacts};
+            console.log(bios); //{name: 'Honey Nay Oo', gender: 'Female', age: 22, phone: '09111111', city: 'Yangon', …}
+            
+            bios = {...infos,...profiles};
+            console.log(bios); //{name: 'Honey Nay Oo', gender: 'Female', age: 20, nickname: 'Honey'}
+
+            bios = {...profiles,...infos};
+            console.log(bios); //{nickname: 'Honey', age: 22, name: 'Honey Nay Oo', gender: 'Female'}
+
+            bios = {...profiles,...infos,country:"Myanmar"};
+            console.log(bios); //{nickname: 'Honey', age: 22, name: 'Honey Nay Oo', gender: 'Female', country: 'Myanmar'}
+
+            bios = {...profiles,...infos,..."Myanmar"};
+            console.log(bios); //{0: 'M', 1: 'y', 2: 'a', 3: 'n', 4: 'm', 5: 'a', 6: 'r', nickname: 'Honey', age: 22, name: 'Honey Nay Oo', gender: 'Female'}
+            
+
+            const students = [..."hello",{name:"aung aung"}]; ////['h', 'e', 'l', 'l', 'o', {…}]
+            console.log(students); 
+
+            const psersons = {
+                name : "Tun Tun",
+                gender : "Male",
+                age:22
+            };
+
+
+// variable ကို key အေမဖြင့် တိုက်ရိုက်သုံး၍ မရ၊ array အေနဖြင့် ေခါ်၍ သုံးေပးရမည်။ variable ကို value အေနဖြင့် သုံး၍ရသည်။
+            const myphone = "091111111";
+            const mycountry = "Myanmar" ;
+            const key1 = "nickname" ;
+            const key2 = "favcolor" ;
+
+            const customer = {
+                ...psersons,
+                hascar : true,
+                tel : myphone,
+                citizen : mycountry,
+                [key1] : "aung",
+                [key2] : "red"
+
+
+            }
+            console.log(customer);
+
+
+
+
+            const keyassign = (obj,key,val)=>{
+
+                const getjob = obj;
+                getjob[key] = val;
+                console.log(getjob); //{name: 'Tun Tun', gender: 'Male', age: 22, hascar: true, tel: '091111111', …}
+
+                const takeobj = {
+                    ...obj
+                };
+
+                takeobj[key]=val;
+                console.log(takeobj); //{name: 'Tun Tun', gender: 'Male', age: 22, hascar: true, tel: '091111111', …}
+
+                const setobj = {
+                    ...obj,
+                    [key]:val
+                }
+
+                console.log(setobj); //{name: 'Tun Tun', gender: 'Male', age: 22, hascar: true, tel: '091111111', …}
+
+            }
+
+            keyassign(customer,"job","Developer");
+
+            // 25OP
+
+        </script>
+    </body>
+</html>
+
+<!--  if your want use keyname as a value, varname don't use direct, use with array [] -->

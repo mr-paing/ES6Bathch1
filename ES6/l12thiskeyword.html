@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>This keyword</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            // Fat arrow function ( => )
+            // Lexical Scope (this)
+
+            // Name Less Regular Function = this work 
+            // Name Less Arrow Function = this not working 
+
+            // Callback Regular Function = this not working 
+            // Callback Arrow Function = this work
+
+
+
+// Window is Global Scope Object in  nodejs
+            function greeting(){
+                console.log('Good Night');
+                console.log(this);
+            }
+            greeting(); // Good Night / Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+
+
+            const sayhi = function(){
+                console.log(this);
+            }
+            sayhi(); // Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+
+
+            const hifi = ()=>{
+                console.log(this);
+            }
+            hifi();  // Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+
+
+// var သည်သာ window နှင့်တွဲ၍ အလုပ်လုပ်သည်
+// let and const are not added value to Window Global Scope 
+            // => Terminal type :   var name = "Aung Aung";
+            // => Terminal type :   name; // Aung Aung
+            // => Terminal type :   window.name; // Aung Aung 
+            // => Terminal type :   window // (extend window > name (yes));
+
+
+            // => Terminal type :   let name = "su su";
+            // => Terminal type :   name; // su su
+            // => Terminal type :   window.name; // Aung Aung 
+            // => Terminal type :   window // (extend window > name (no));
+
+
+            // => Terminal type :   const name = "Thiha";
+            // => Terminal type :   name; // Thiha
+            // => Terminal type :   window.name; // Aung Aung 
+            // => Terminal type :   window // (extend window > name (no));
+
+
+            // => Terminal type :   var gender = "male";
+            // => Terminal type :   gender; // male
+            // => Terminal type :   window.gender; // male
+            // => Terminal type :   window // (extend window > gender (yes));
+
+
+            // => Terminal type :   let city = "Yangon";
+            // => Terminal type :   city; // Yangon
+            // => Terminal type :   window.city; // undefined 
+            // => Terminal type :   window // (extend window > city (yes));
+
+
+            // => Terminal type :   var city = "Mandalay";
+            // => Terminal type :   city; // Mandalay
+            // => Terminal type :   window.city; // Mandalay 
+            // => Terminal type :   window // (extend window > name (no));
+
+
+            const items = {
+                product : "iphone 15",
+                price : 2000,
+                info : function(){
+                    return `${this.product} price is base on ${this.price} USD.`; // iphone 15 price is base on 2000 USD.
+                },
+                discount : ()=>{
+                    return `use ${this.price} USD for ${this.product} ! Get 20% cash back.`; // use undefined USD for undefined ! Get 20% cash back.
+                }
+            }
+
+
+            console.log(items);
+            console.log(items.info());
+            console.log(items.discount());
+
+
+            const group = {
+                members : ["Aung Aung","Su su"],
+                groupname : "Frontend Desiner",
+
+                groupmember:()=>{
+                    console.log(`There are 2 member on this ${this.groupmember} group.`); // There are 2 member on this undefined group.
+                },
+
+                groupinfo : function(){
+                    return this.members.map(member=>{
+                        console.log(`${member} is on ${this.groupname} group.`); // Aung Aung is on Frontend Desiner group. // Su su is on Frontend Desiner group.
+                    });
+                },
+
+                groupsay : function(){
+                    return this.members.map(function(member){
+                        console.log(`${member} is key person on this ${this.groupname} group.`); // Aung Aung is key person on undefined group. // Su su is key person on undefined group.
+                    });
+                }
+            }
+
+            console.log(group);
+            group.groupmember();
+            group.groupinfo();
+            group.groupsay();
+
+
+            function createitem(inventory){
+                return {
+                    inventory, //keyname တူလှျင်၊ ထို keyname ကိုမ ေပးလည်းရသည်။
+                    itemvalue : function(){
+                        return this.inventory.reduce((total,curr)=>{
+                            total += curr.price
+                            return total;
+                        },0);
+                    }
+                }
+            }
+
+            const inventory = [
+                {title:"Redbull",price:1500},
+                {title:"Sponsor",price:1000}
+            ];
+
+            const getresult = createitem(inventory);
+
+            console.log(getresult); //{inventory: Array(2), itemvalue: ƒ}
+            console.log(getresult.itemvalue());  //2500
+
+        </script>
+    </body>
+</html>

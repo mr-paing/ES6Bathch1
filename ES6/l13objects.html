@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>objects</title>
+</head>
+<body>
+    
+
+
+    <script type="text/javascript">
+
+        const persons= {
+
+            //Properties
+            name : "aung aung",
+            age : 25,
+            address : {
+                street : "No.60, mitter street",
+                city : "mandalay"
+            },
+
+            //method / member method
+            job : function(){
+                console.log('Frontend Web Designer');
+            }
+        }
+
+        // we have 2 way to create an object 
+        // (i) Factory function 
+        // (ii) constructor function 
+
+
+        // (i) Factory function 
+        function info(val){
+            return {
+                // peoperties 
+                name:val,
+
+                // method 
+                job : function(){
+                    console.log(`${val} is Fronted Web Designer`);
+                }
+            }
+        }
+
+
+        const getinfo = info("aung aung");
+
+        console.log(getinfo); //{name: 'aung aung', job: ƒ}
+        console.log(getinfo.name); //aung aung
+        getinfo.job(); //aung aung is Fronted Web Designer
+
+
+// => to get object's key 
+        const getinfokey = Object.keys(getinfo);
+
+        console.log(getinfokey); //(2) ['name', 'job']
+
+
+// (ii) Constructor function (the first letter should be uppercase)
+        function Phone(brand){
+            this.brand = brand;
+            this.like = function(){
+                console.log(`I love ${brand}`);
+            }
+
+            console.log('this value is ', this); // Note :: if you run (this) indide of a object , will get current object base 
+                            // Note :: if you run (this) indide of a browser , will get window base (global object)
+        }
+
+        // this is global object | if run on browser , it return window_object or window_base
+
+        const getobj = new Phone('iphone'); // new = {} Note :: When ew use (new operator) will create new empty object
+        console.log(getobj);
+        console.log(getobj.brand); //iphone
+        getobj.like(); //I love iphone
+
+        const getobjkeys = Object.keys(getobj);
+        console.log(getobjkeys); // (2) ['brand', 'like']
+
+        // console.log(Phone('sony')); //this value is  Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+//this များအလုပ်လုပ်ေနခြင်းသည် new operator နှင့်ဆက်စပ်ေနသည်၊ ထို့ေကြာင့် new Operator မပါလှျင် window base ကိုရသည်
+
+
+// => Adding Properties 
+        getobj.madeby = "china";
+        getobj["osversion"] = "IOS 18";
+        getobj.price = {pro:1000,promax:1500};
+
+        getobj.colors = function(){
+            console.log("All colors are same price");
+        };
+
+        console.log(getobj);  // Phone {brand: 'iphone', madeby: 'china', osversion: 'IOS 18', price: {…}, like: ƒ, …}
+
+
+// => Delete Properties
+        delete getobj.madeby;
+        console.log(getobj); // Phone {brand: 'iphone', osversion: 'IOS 18', price: {…}, like: ƒ, colors: ƒ}
+
+
+// (ii) Constructor function (the first letter should be uppercase)
+        // Method 2
+
+        const Computer = new Function('brand',`
+            this.brand = brand;
+            this.like = function(){
+                console.log("i love computer");
+            }
+        `);
+
+        const getobj2 = new Computer('Dell');
+
+        console.log(getobj2); //{brand: 'Dell', like: ƒ}
+        console.log(getobj2.brand); //Dell
+        console.log(typeof getobj2.brand);  //string
+        console.log(getobj2.like()); //i love computer
+        console.log(typeof getobj2.like());  
+
+
+// => Note :: Functions are object in js 
+
+            console.log(Phone.name); //Phone
+            console.log(Computer.name); //anonymous
+
+            console.log(Phone.length); // 1 ( it's means 1 parameter)
+            console.log(Computer.length); //1 (it's mean 1 parameter)
+
+
+//မိမိမထုတ်လိုေသာ method (or) properties များကို စစ်ထုတ်ရန် , 
+
+            for(let key in getobj2){
+                // console.log(key,getobj2[key]);
+
+                if(typeof getobj2[key] !== "function"){
+                    console.log(key,getobj2[key]);
+                }
+            }
+
+            for(let key in getobj2) console.log(key);
+
+// ရှိ / မရှိ စစ်ရန်
+// => check properties name in funcitons exists or not 
+            if('brand' in getobj2){
+                console.log("Yes, getobj2 has a brand key");
+            }else{
+                console.log("No");
+            }
+
+    </script>
+</body>
+</html>
