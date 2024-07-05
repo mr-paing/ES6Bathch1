@@ -10,7 +10,7 @@
 
     <script type="text/javascript">
   
-        // INheritance 
+        // Inheritance 
         // (a) Object Base (Object.prototype)
         // (b) Array Base (Array.prototype)
 
@@ -182,6 +182,42 @@
             console.log("No"); // No
         }
 
+
+        function Vehicle(brand){
+            this.brand = brand;
+            this.like = function(){
+                return `I like ${this.brand}`;
+            }
+
+        }
+
+        const getobj3 = new Vehicle('suzuki');
+        console.log(getobj3);
+        console.log(getobj3.brand); // suzuki 
+        console.log(getobj3.like());  // I like suzuki
+
+
+        // Method 2
+
+        const getobj4 = new Vehicle.prototype.constructor('mazda');
+        console.log(getobj4); // Vehicle {brand: 'mazda', like: ƒ}
+        console.log(getobj4.brand); // mazda
+        console.log(getobj4.like()); // I like mazda
+
+        const getobj4keys = Object.keys(getobj4);
+        console.log(getobj4keys); // (2) ['brand', 'like']
+
+        if(getobj4.hasOwnProperty('brand')){
+            console.log('yes'); // yes
+        }else{
+            console.log('no');
+        }
+
+        if(getobj4.hasOwnProperty('like')){
+            console.log('yes'); // yes
+        }else{
+            console.log('no');
+        }
 
     </script>
 </body>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Calling the Super Constructor</title>
+    </head>
+    <body>
+        
+        <script type="text/javascript">
+
+            function Vehicle(color){
+                this.color = color; 
+            }
+
+            Vehicle.prototype.vancar = function(){
+                return 'this is vancar';
+            }
+
+            function Bike(brand,colour){
+
+                // this.colour = colour; //red
+
+                // Vehicle(colour); // undefined
+                // Vehicle("orange"); // undefined
+
+                // Vehicle.call(this,"orange");
+                Vehicle.call(this,colour); // red
+
+                this.brand = brand;
+
+            }
+
+            Bike.prototype = Object.create(Vehicle.prototype);
+            Bike.prototype.constructor = Bike;
+
+        // ***Note :: must extend prototype member after inheritance
+            Bike.prototype.ebike = function(){
+                return 'this is ebike';
+            }
+
+            const vehicleobj = new Vehicle("black");
+            const bikeobj = new Bike('marin','red');
+
+            console.log(vehicleobj); //Vehicle {color: 'black'}
+            console.log(vehicleobj.color); //red
+            console.log(vehicleobj.vancar()); // this is vancar
+
+            console.log(bikeobj); // Bike {brand: 'marin'}
+            console.log(bikeobj.brand); // marin
+            console.log(bikeobj.ebike()); // this is ebike
+
+
+            console.log(bikeobj.vancar()); // this is vancar
+            console.log(bikeobj.colour); // red
+            console.log(bikeobj.colour); // red
+
+ 
+        </script>
+    </body>
+</html>
+
+
+<!-- I need to try again. I don't understand clearly about callingsuperconstructor function , the function call() donsn't work well -->
