@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Method</title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+
+        // static method is used for to remove new keyword
+        
+        class Phone{
+            constructor(brand){
+                this.brand = brand;
+            }
+
+            // Instance Method 
+            madeby(country){
+                return `Made by ${country}`;
+            }
+
+            // Static Method 
+            static price(total){
+                return `Grand total is USD ${total}`;
+            }
+
+            // static method [pre declare to use without new keyword when instantiate]
+            static setbrand(val){
+                return new Phone(val);
+            }
+        }
+
+        const obj1 = new Phone('I Phone');
+        console.log(obj1); // Phone {brand: 'I Phone'}
+        console.log(obj1.madeby("US")); // Made by US
+        // console.log(obj1.price(1000)); // TypeError: obj1.price is not a function
+
+        const obj2 = new Phone('Mi');
+        console.log(obj2); // Phone {brand: 'Mi'}
+        console.log(obj2.brand); // Mi
+        console.log(obj2.madeby('China')); // Made by China
+
+        const obj3 = Phone.setbrand("Sony");
+        console.log(obj3); // Phone {brand: 'Sony'}
+        console.log(obj3.brand); // Sony
+        console.log(obj3.madeby("Japan")); // Made by Japan
+
+
+       
+
+    </script>
+</body>
+</html>

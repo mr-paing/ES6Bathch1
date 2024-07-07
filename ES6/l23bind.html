@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bind</title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+        
+        //  => bind(obj);
+
+        const myinfo = {
+            age : 25,
+            getage : function(){
+                return this.age;
+            }
+        };
+
+        const myage1 = myinfo.getage();
+        console.log(myage1); //25
+
+        const myage2 = myinfo.getage;
+        console.log(myage2()); // undefined
+
+        const myage3 = myage2.bind(myinfo);
+        console.log(myage3()); // 25
+
+        
+    </script>
+</body>
+</html>

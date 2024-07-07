@@ -16,21 +16,28 @@
             }
 
             function Bike(brand,colour){
-
-                this.colour = colour; //red
-
-                // Vehicle(colour); // undefined
-                // Vehicle("orange"); // undefined
-
-                // Vehicle.call(this,"orange");
                 Vehicle.call(this,colour); // red
 
                 this.brand = brand;
 
             }
 
-            Bike.prototype = Object.create(Vehicle.prototype);
-            Bike.prototype.constructor = Bike;
+            function Board(brand){
+                this.brand = brand;
+            }
+
+            // Style 1
+            // Bike.prototype = Object.create(Vehicle.prototype);
+            // Bike.prototype.constructor = Bike;
+
+            // Style 2 for reuse 
+            function extend(Parent,Child){
+                Child.prototype = Object.create(Parent.prototype);
+                Child.prototype.constructor = Child;
+            }
+
+            extend(Vehicle,Bike);
+            extend(Vehicle,Board);
 
         // ***Note :: must extend prototype member after inheritance
             Bike.prototype.ebike = function(){
@@ -39,9 +46,10 @@
 
             const vehicleobj = new Vehicle("black");
             const bikeobj = new Bike('marin','red');
+            const boardobj = new Board('searay');
 
             console.log(vehicleobj); //Vehicle {color: 'black'}
-            console.log(vehicleobj.color); //red
+            console.log(vehicleobj.color); //black
             console.log(vehicleobj.vancar()); // this is vancar
 
             console.log(bikeobj); // Bike {brand: 'marin'}
@@ -50,8 +58,13 @@
 
 
             console.log(bikeobj.vancar()); // this is vancar
-            console.log(bikeobj.colour); // red
+            console.log(bikeobj.colour); // undefined
             console.log(bikeobj.color); // red
+
+            console.log(boardobj); // Board {brand: 'searay'}
+            console.log(boardobj.brand);  ///searay
+            console.log(boardobj.vancar()); // this is bancar
+
 
  
         </script>
@@ -59,4 +72,3 @@
 </html>
 
 
-<!-- I need to try again. I don't understand clearly about callingsuperconstructor function , the function call() donsn't work well at 7Apail2024ES6 53ms -->

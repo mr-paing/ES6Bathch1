@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+        
+        
+        const Student = function(name){
+            this.name = name;
+            this.subjects = function(){
+                return 'Myanmar,English,Math';
+            }
+        };
+
+        const obj1 = new Student("aung aung");
+        console.log(obj1); // Student {name: 'aung aung', subjects: ƒ}
+        console.log(obj1.name); // aung aung
+        console.log(obj1.subjects()); // Myanmar,English,Math
+
+// => Class
+
+        class Employees{
+            
+            constructor(name){
+                this.name = name;
+                this.codes = function(){
+                    return "PHP,Laravel,React";
+                }
+            }
+
+            // instance method 
+            Salary = (amount,currency)=>{
+                return `${amount} ${currency} par month.`;
+            }
+
+            // instance method 
+            contact(){
+                return `No.1, Myitter St, Mandalay`;
+            }
+        }
+
+        const obj2 = new Employees("su su");
+        console.log(obj2); //Employees {name: 'su su', codes: ƒ}
+        console.log(obj2.name); // su su
+        console.log(obj2.codes()); // PHP,Laravel,React
+        console.log(obj2.Salary(500,'USD')); // 500 USD par month.
+        console.log(obj2.contact()); // No.1, Myitter St, Mandalay
+
+    
+
+        class Person{
+            constructor(firstname,lastname,city){
+                this.firstname = firstname;
+                this.lastname = lastname;
+                this.address = city;
+            }
+
+            // instance member 
+            getfullname = (title)=>{
+                return `${title}.${this.firstname} ${this.lastname}`;
+            }
+        }
+
+
+        const obj3 = new Person("Aung","Kyaw Kyaw","Yangon");
+        console.log(obj3); // Person {firstname: 'Aung', lastname: 'Kyaw Kyaw', address: 'Yangon', getfullname: ƒ}
+        console.log(obj3.firstname,obj3.lastname); // Aung Kyaw Kyaw
+        console.log(obj3.address); // Yangon
+        console.log(obj3.getfullname("Mr")); //Mr.Aung Kyaw Kyaw
+
+        const obj4 = new Person("Nu Nu","Aye",["Bago","Mandalay"]);
+        console.log(obj4); // Person {firstname: 'Nu Nu', lastname: 'Aye', address: Array(2), getfullname: ƒ}
+        console.log(obj4.firstname,obj4.lastname); // Nu Nu Aye
+        console.log(obj4.address); // ['Bago', 'Mandalay']
+        console.log(obj4.address[0]); // Bago
+        console.log(obj4.address[1]); // Mandalay
+        console.log(obj4["address"][0]); // Bago 
+        console.log(obj4["address"][1]); // Mandalay
+        console.log(obj4.getfullname("Ms")); // Ms.Nu Nu Aye
+        
+
+
+
+    </script>
+</body>
+</html>
+

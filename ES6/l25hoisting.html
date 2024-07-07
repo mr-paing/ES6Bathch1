@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoisting (Do & Don't ) </title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+        
+        myfunone();
+
+// Function Declaration
+        function myfunone(){
+            console.log('my fun one');
+        }
+
+        myfunone();
+
+        
+// Function Expression
+
+        // myfuntwo(); // error : Cannot access 'myfuntwo' before initialization
+        const myfuntwo = function(){
+            console.log('my fun two');
+        }
+
+        myfuntwo();
+
+
+// ...............................................
+
+// Note :: Class methods can't use before initialization
+
+// Class Declaration 
+    
+        // const seasonobj1 = new Seasonone();
+        // console.log(seasonobj1.info); // error : Cannot access 'Seasonone' before initialization
+
+        class Seasonone{
+            constructor(){
+                this.info = "this is season one";
+            }
+        }
+
+        const seasonobj1 = new Seasonone();
+        console.log(seasonobj1.info); // this is seasonone
+
+// Class Expression 
+
+        // const seasonobj2 = new Seasontwo();
+        // console.log(seasonobj2); // error : Cannot access 'Seasontwo' before initialization
+
+        const Seasontwo = class{
+            constructor(){
+                this.info = "this is seasion two";
+            }
+        }
+
+        // const seasonobj2 = new Seasontwo();
+        // console.log(seasonobj2); // Seasontwo {info: 'this is seasion two'}
+
+    </script>
+</body>
+</html>

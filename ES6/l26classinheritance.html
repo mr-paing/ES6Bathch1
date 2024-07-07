@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Inheristance </title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+        
+       class Person{
+            constructor(firstname,lastname,city){
+                this.firstname = firstname;
+                this.lastname = lastname;
+                this.location = city;
+            }
+
+            getfullname = title=>{
+                return `${title}.${this.firstname} ${this.lastname}`;
+            }
+
+       }
+
+       class Position extends Person{
+            jobtitle = title=>{
+                return `${title}`;
+            }
+       }
+
+       const obj1 = new Person("Aung","Tun Tun","Yangon");
+       console.log(obj1); // Person {firstname: 'Aung', lastname: 'Tun Tun', location: 'Yangon', getfullname: ƒ}
+       console.log(obj1.firstname,obj1.lastname); // Aung Tun Tun
+
+       const obj2 = new Position("Yu Yu","Aye","Mandalay");
+       console.log(obj2); // Person {firstname: 'Yu Yu', lastname: 'Aye', location: 'Mandalay', getfullname: ƒ}
+       console.log(obj2.firstname,obj2.lastname); // Yu Yu Aye
+       console.log(obj2.location); // Mandalay
+       console.log(obj2.jobtitle("Manager")); // Manager
+
+
+// -----------------
+
+       class Car{
+        constructor(brand,color){
+            this.brand = brand;
+            this.color = color;
+        }
+       }
+
+       Car.prototype.summarize = function(){
+        return `brand is ${this.brand}. color is ${this.color}`;
+       }
+
+       const obj3 = new Car("Toyota","White");
+       console.log(obj3); // Car {brand: 'Toyota', color: 'White'}
+       console.log(obj3.brand); // Toyota
+       console.log(obj3.color); // white
+       console.log(obj3.summarize()); // brand is Toyota. color is White
+
+    </script>
+</body>
+</html>

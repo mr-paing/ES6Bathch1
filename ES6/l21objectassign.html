@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Assign</title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+  
+        const frontend = {
+            design : function(){
+                console.log('Frontend web developer');
+            }
+        };
+
+        const backend = {
+            unit : function(){
+                console.log('Backend web developer');
+            }
+        };
+
+        const database = {
+            store : function(){
+                console.log('Database System');
+            }
+        };
+
+        const server = {
+            cloud : function(){
+                console.log('Cloud Computing System');
+            }
+        }
+
+        console.log(frontend); // {design: ƒ}
+        console.log(frontend.design()); // Frontend web developer
+
+        console.log(backend); // {unit: ƒ}
+        console.log(backend.unit()); // Backend web developer
+
+
+        // Method 1
+        const obj1 = Object.assign({},frontend,backend,database,server);
+        console.log(obj1); //{design: ƒ, unit: ƒ, store: ƒ, cloud: ƒ}
+
+        function Personone(){
+
+        };
+
+        Object.assign(Personone.prototype,frontend,backend);
+
+        function Persontwo(){
+
+        }
+
+        Object.assign(Persontwo.prototype,frontend,backend,database);
+
+        const p1 = new Personone();
+        const p2 = new Persontwo();
+
+        console.log(p1);
+        console.log(p2);
+
+
+        function objfun(obj,...methods){
+            // console.log(methods);
+            // console.log(...methods);
+            Object.assign(obj.prototype,...methods);
+        }
+
+        function Personthree(){
+
+        }
+
+        objfun(Personthree,frontend,backend,database,server);
+
+        const p3 = new Personthree();
+        console.log(p3);
+
+    </script>
+</body>
+</html>
