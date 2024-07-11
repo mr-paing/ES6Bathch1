@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Async with Promise </title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+
+        const promise = new Promise((resolve,reject)=>{
+            // resolve();
+            // reject();
+
+            // setTimeout(()=>{
+            //     resolve();
+            // },3000);
+
+            setTimeout(()=>{
+                reject();
+            },3000);
+        });
+
+        // console.log(promise);
+
+        promise 
+                .then(()=>console.log("finilly finished"))
+                .then(()=>console.log("I can also run"))
+                .catch(()=>console.log("catch is working"));
+        
+    </script>
+</body>
+</html>
+<!-- 
+=> Promise (States)
+    (i)  unresolved  (waiting for something to finish)
+    (ii) resolved    (something finished and it all OKI)
+    (iii) reject     (something finished but want bad)
+
+
+
+    Promise -> Request (Everything worked out) -> status (Resolved) -> Callback (then)
+    Promise -> Request (Something bad happened) -> status (Rejected) -> Callback (catch)
+
+     -->

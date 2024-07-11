@@ -48,12 +48,12 @@
 
 => WEBPACK
 
-    create folder toolpackage
+    create folder toolwebpack
 
     https://webpack.js.org/ >  DOCUMEMTATION > Guide > Installation > Global Installation 
 
     For Windows = npm install --global webpack 
-    For Linux = sudo npm install --glocal webpack 
+    For Linux = sudo npm install --global webpack 
 
     webpack --help 
 
@@ -82,7 +82,7 @@
     // do not overwrite : n
 
 
-    create "dist" filder and create file "main.js" inside of dist folder.
+    create "dist" folder and create file "main.js" inside of dist folder. both must be inside of toolwebpack.
     "dist" folder > main.js / console.log("hello world");
 
     npm run build
