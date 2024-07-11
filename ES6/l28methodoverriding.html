@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Method Overriding </title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+        
+      class Student{
+
+        getname(){
+            console.log(`Aung Aung`);
+        }
+      }
+
+      class Staff extends Student{
+        getname(){
+            return `Mr.Aung Aung`;
+        }
+      }
+
+      const obj1 = new Student();
+      console.log(obj1); // Student {}
+      obj1.getname(); // Aung Aung
+
+      const obj2 = new Staff();
+      console.log(obj2); // Staff {}
+      console.log(obj2.getname()); // Mr.Aung Aung
+
+      
+
+
+      class Boss{
+        getname(){
+            console.log(`Su Su`);
+        }
+      }
+
+      class Employeer extends Boss{
+        getname(){
+            super.getname();
+            return `Ms.Su Su`;
+        }
+      }
+
+      const obj3 = new Boss();
+      console.log(obj3); // Boss {}
+      obj3.getname(); // Su Su
+
+      const obj4 = new Employeer();
+      console.log(obj4); // Employeer {}
+      console.log(obj4.getname()); // Su Su Ms.Su Su
+
+      
+
+
+      
+
+
+    </script>
+</body>
+</html>

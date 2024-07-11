@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Getter & Setter </title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+
+        const _brand = new WeakMap();
+        const _network = new WeakMap();
+        const _color = new WeakMap();
+
+        class Phone{
+            constructor(brand,network){
+                // Private Property 
+                _brand.set(this,brand);
+                _network.set(this,network);
+
+                // Private Method 
+                _color.set(this,()=>{
+                    return(this);
+                });
+
+                // Method 2
+                Object.defineProperty(this,'productbrand',{
+                    get : function(){
+                        return brand;
+                    }
+                })
+
+
+                let madeby = "china";
+                Object.defineProperty(this,'madeby',{
+                    get : function(){
+                        return `${madeby} made`;
+                    },
+                    set : function(country){
+                        if(country === 'myanmar'){
+                            throw new Error("Invlid Country");
+                        }else{
+                            madeby = country;
+                        };
+                    }
+                    
+                });
+
+            }
+
+            // Method 1
+            getbrand(){
+                return _brand.get(this);
+            }
+
+            getnetwork = ()=>{
+                return _network.get(this);
+            }
+
+            getcolorcode = function(){
+                return _color.get(this)();
+            }
+
+            // method 3
+            // look like method , but it is property
+            get brandname(){
+                return _brand.get(this);
+            }
+
+            get mobilenetwork(){
+                return _network.get(this);
+            }
+
+            set mobilenetwork(val){
+                if(val === "6G") throw new Error("Invalic network connection.");
+                return _network.set(this,val);
+                
+            }
+        }
+
+        const obj1 = new Phone("IPhone","5G");
+        
+        console.log(obj1); // Phone {getnetwork: ƒ, getcolorcode: ƒ}
+        console.log(obj1.getbrand()); // IPhone
+        console.log(obj1.getnetwork()); // 5G
+        console.log(obj1.getcolorcode()); // Phone {getnetwork: ƒ, getcolorcode: ƒ}
+
+        console.log(obj1.productbrand); // IPhone
+
+        obj1.madeby = "korea";
+        console.log(obj1.madeby);
+
+
+        console.log(obj1.brandname); // IPhone
+
+        obj1.mobilenetwork = '4G';
+        console.log(obj1.mobilenetwork); // 4G
+
+        console.log(obj1.getbrand()); // IPhone
+        console.log(obj1.getnetwork()); // 4G
+
+
+        // Method 4 
+
+        console.log(_brand.get(obj1)); // IPhone
+        console.log(_network.get(obj1)); // 4G
+        console.log(_color.get(obj1)()); // Phone {getnetwork: ƒ, getcolorcode: ƒ}
+
+
+
+        
+
+
+
+    </script>
+</body>
+</html>

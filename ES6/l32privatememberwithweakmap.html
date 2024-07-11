@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Private Member With Weakmap </title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+
+    // Method 1
+        const _brand = new WeakMap(); 
+        const _network = new WeakMap();
+        const _color = new WeakMap();
+
+        class Phone{
+                constructor(brand,network){
+                // -> public property
+                    // this.brand = brand;
+
+                // -> Private property 
+                _brand.set(this,brand);
+                _network.set(this,network);
+
+                // -> Privite method 
+                // Undefined , can't use regular function 
+                // _color.set(this,function(){
+                //     return(this);
+                // });
+
+                _color.set(this,()=>{
+                    return(this);
+                });
+            }
+
+            // -> public method 
+            getbrandname(){
+               return _brand.get(this);
+            }
+
+            getphonenetwork(){
+                return _network.get(this);
+            }
+
+            getcolor(){
+                return _color.get(this)();
+            }
+        }
+
+        const obj1 = new Phone("IPhone","5G");
+        console.log(obj1);
+
+        console.log(obj1.getbrandname());
+        console.log(obj1.getphonenetwork());
+        console.log(obj1.getcolor());
+
+// -----------------------------
+    
+    // Method 2
+        const priviteprops = new WeakMap();
+
+        class Mobile{
+            constructor(brand,network){
+                priviteprops.set(this,{
+                    brand : brand,
+                    network : network,
+                    color : ()=>{
+                        return(this);
+                    }
+                });
+            }
+
+            getbrand(){
+               return priviteprops.get(this).brand;
+            }
+
+            getmobilenetwork = function(){
+               return priviteprops.get(this).network;
+            }
+
+            getcolor = ()=>{
+               return priviteprops.get(this).color();
+            }
+        }
+
+
+        const obj2 = new Mobile("Sony","4G");
+
+        console.log(obj2.getbrand()); // Sony
+        console.log(obj2.getmobilenetwork()); // 4G
+        console.log(obj2.getcolor());
+
+
+        
+    </script>
+</body>
+</html>

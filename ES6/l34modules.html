@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Modules </title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+
+    // // Method 1
+    //     const _brand = new WeakMap(); 
+    //     const _network = new WeakMap();
+    //     const _color = new WeakMap();
+
+    //     class Phone{
+    //             constructor(brand,network){
+    //             // -> public property
+    //                 // this.brand = brand;
+
+    //             // -> Private property 
+    //             _brand.set(this,brand);
+    //             _network.set(this,network);
+
+    //             // -> Privite method 
+    //             // Undefined , can't use regular function 
+    //             // _color.set(this,function(){
+    //             //     return(this);
+    //             // });
+
+    //             _color.set(this,()=>{
+    //                 return(this);
+    //             });
+    //         }
+
+    //         // -> public method 
+    //         getbrandname(){
+    //            return _brand.get(this);
+    //         }
+
+    //         getphonenetwork(){
+    //             return _network.get(this);
+    //         }
+
+    //         getcolor(){
+    //             return _color.get(this)();
+    //         }
+    //     }
+
+    //     const obj1 = new Phone("IPhone","5G");
+    //     console.log(obj1);
+
+    //     console.log(obj1.getbrandname());
+    //     console.log(obj1.getphonenetwork());
+    //     console.log(obj1.getcolor());
+
+
+    //     // calling outside 
+    //     console.log(_brand.get(obj1)); // IPhone
+    //     console.log(_network.get(obj1)); // 5G
+    //     console.log(_color.get(obj1)()); // Phone {}
+
+
+    
+    
+    </script>
+
+    <script src="./l34app.js" type="module"></script>
+
+</body>
+</html>
+
+<!-- 
+
+Modules 
+Note :: No Modules in ES6
+
+AMD             [Asynchronous Moudle Definitions] , Browser 
+CommonJS        Node.js
+UMD             [Universal Module Definitions] , Browser / Node.js 
+ES6 Module      Browser
+
+Note :: We just need to forecast commonJS(Node.js) and ES6 Module(Browser)
+
+
+
+=> ES6 Tools 
+    Note:: when you use modern javascript (es6) , we need 2 kinds of tools 
+    
+    1. Transplier 
+    2. Bundle
+
+    1. Transplier (Translator + Complier)
+
+        Modern javascript (es6) -> BABLE ->ES5
+
+        Note:: BABLE is a very popular fro modren javascript
+
+    2. Bundler (Combing all javascript file to single file,it can remove whitespace, comments  )
+        .js .js .js .js .js -> WEBPACK -> .js
+
+
+
+ -->

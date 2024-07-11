@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> this keyword </title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+        
+      const Phone = function(){
+        this.brand = function(){
+            console.log(this);
+        }
+      }
+
+      const obj1 = new Phone();
+      console.log(obj1); // Phone {brand: ƒ}
+
+    //   Method Call 
+      obj1.brand();
+
+    //   Function Call 
+    const getbrand = obj1.brand;
+    getbrand();
+
+    </script>
+</body>
+</html>

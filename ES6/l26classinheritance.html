@@ -59,6 +59,42 @@
        console.log(obj3.color); // white
        console.log(obj3.summarize()); // brand is Toyota. color is White
 
+// ---------------
+
+       class Phone{
+        constructor(brand){
+            this.brand = brand;
+        }
+
+        madeby(val){
+            return `${val} made`;
+        }
+       }
+
+       class Mobile extends Phone{
+
+        constructor(brand,network,price){
+            super(brand); // super is super constructor. it is used to set own properties in the inherit child
+
+            this.network = network;
+            this.price = price;
+        }
+
+        color(val){
+            return `${val} color`;
+        }
+       }
+
+       const obj4 = new Mobile("Sony","5G","USD 1000");
+       
+       console.log(obj4); // Phone {brand: 'Sony'}
+       console.log(obj4.madeby("Japan")); // Japan made
+       console.log(obj4.color("Titanium")); //Titanium color
+       console.log(obj4.brand); // Sony
+       console.log(obj4.network); // 5G
+       console.log(obj4.price); // USD 1000
+
+
     </script>
 </body>
 </html>
