@@ -80,6 +80,42 @@
             console.log(Object.keys(person)); //  ['city', 'age', 'phone']
 
 
+            // =enumerabble : true
+
+            const myobj = {};
+
+            Object.defineProperty(myobj,'enumerableProperty',{
+                value : "I am Bot",
+                enumerable : true
+            });
+
+            for(let key in myobj){
+
+                console.log(key);  // enumerableProperty
+
+            }
+
+            console.log(Object.keys(myobj)); // ['enumerableProperty']
+            console.log(JSON.stringify(myobj)); // {"enumerableProperty":"I am Bot"}
+
+
+            // =enumerabble : false
+
+            const yourobj = {};
+
+            Object.defineProperty(yourobj,'enumerableProperty',{
+                value : "I am Bot",
+                enumerable : false //  no result
+            });
+
+            for(let key in yourobj){
+
+                console.log(key);  // enumerableProperty
+
+            }
+
+            console.log(Object.keys(yourobj)); // []
+            console.log(JSON.stringify(yourobj)); // {}
 
 
         //=> Instance Members vs Prototype Members

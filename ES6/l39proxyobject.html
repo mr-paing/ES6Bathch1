@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Object - new es6 syntax</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        // => Proxy(target object,handler object)
+
+        let vehicle = {
+            brand : 'toyota',
+            model : "land cruiser",
+            engine : 'petrol'
+        };
+
+        let getcar = new Proxy(vehicle,{
+            // trad mead 
+            // get(target obj,properties name,proxy obj)
+
+            get(target,prop,receiver){
+                if(prop === "brand"){
+                    return target[prop].toUpperCase();
+                }else if(prop === "model"){
+                    return target[prop].toUpperCase();
+                }else if(prop === "receiver"){
+                    return receiver;
+                }else{
+                    return "Access Deny";
+                }
+            }
+        });
+
+        let obj1 = Object.create(getcar);
+        console.log(obj1); // {}
+        console.log(obj1.brand); // TOYOTA
+        console.log(obj1.model); // LAND CRUISER
+        console.log(obj1.receiver); // {}
+        console.log(obj1.engine); // Access Deny
+
+
+        // => Private properties using the GET trap 
+
+        let mobile = {
+            brand : "sansung",
+            model : "galaxy y",
+            network : "4g",
+            _id : 10011
+        };
+
+        let getphone = new Proxy(mobile,{
+            // trap method 
+            get(target,prop,receiver){
+                if(prop[0] === "_"){
+                    return "Access Deny";
+                }else{
+                    return target[prop].toUpperCase();
+                }
+            }
+        });
+
+        let obj2 = Object.create(getphone);
+        console.log(obj2); // {}
+        console.log(obj2.brand); // SANSUNG
+        console.log(obj2.model); // GALAXY Y
+        console.log(obj2.network); // 4G
+        console.log(obj2._id); // Access Deny
+
+
+        let gettelephone = new Proxy(mobile,{
+            // trap method 
+            get(target,prop,receiver){
+                if(prop[0] === "_"){
+                    return "Access Deny";
+                }else{
+                    return target[prop].toUpperCase();
+                }
+            },
+
+            set(target,prop,val,receiver){
+                if(prop[0] === '_'){
+                    throw 'cannot set value for this prop';
+                }else{
+                    target[prop] = val;
+                }
+            }, 
+
+            has(target,prop){
+
+                if(prop[0] === '_'){
+                    return false;
+                }else{
+                    return Reflect.has(target,prop);
+                }
+
+            }
+        });
+
+        let obj3 = Object.create(gettelephone);
+        console.log(obj3); // {}
+        console.log(obj3.brand); // SANSUNG
+        console.log(obj3.network); // 4G
+        console.log(obj3._id); // Access Deny
+
+        // obj3._id = 100; // error : Uncaught cannot set value for this prop
+
+        obj3.brand = 'iPhone';
+        obj3.model = 'iPhone 15pro';
+        obj3.network = '5g';
+
+        console.log(obj3); // {}
+        console.log(obj3.brand); // IPHONE
+        console.log(obj3.model); // IPHONE 15PRO
+        console.log(obj3.network); // 5G 
+        console.log(obj3._id); // Access Deny
+
+
+
+// check property has or not 
+
+        // console.log('Network' in obj3); // false 
+        console.log('network' in obj3); // true 
+        console.log('_id' in obj3); 
+
+        console.log(Reflect.has(obj3,'Network')); // false 
+        console.log(Reflect.has(obj3,'network')); // true 
+        console.log(Reflect.has(obj3,'_id'));
+
+
+        let gethandphone = new Proxy(mobile,{
+
+            get(target,prop,receiver){
+
+                if(prop[0] === '_'){
+                    return 'access denied';
+                }else{
+                    return target[prop];
+                }
+
+            }, 
+
+            set(target,prop,val,receiver){
+                if(prop[0] === '_'){
+                    throw 'cannot set value this prop';
+                }else{
+                    return target[prop] = val.toUpperCase();
+                }
+            }
+
+        });
+
+        let obj4 = Object.create(gethandphone);
+        console.log(obj4.__proto__); // access denied
+        console.log(Object.getPrototypeOf(obj4)); // Proxy(Object) {brand: 'iPhone', model: 'iPhone 15pro', network: '5g', _id: 10011}
+        
+        console.log(obj4.brand);
+        obj4.madeby = 'China';
+
+        console.log(Object.getPrototypeOf(obj4));
+        console.log(obj4.madeby); //CHINA
+
+
+        // l16prototype
+        let myproxyobj = new Proxy({},{
+            // defineProperty(target,prop,descriptor){
+            //     return true;
+            // }
+
+            defineProperty(target,prop,descriptor){
+
+                descriptor.value = "Have to say good bye";
+                descriptor.writable = true;
+                descriptor.enumerable = false; // can not access looping
+                // descriptor.configurable = false;
+
+                Reflect.defineProperty(target,prop,descriptor);
+                return true;
+
+            }
+        });
+
+        myproxyobj.greeting = "Welcome to our mobile techonology";
+        console.log(myproxyobj);
+
+        console.log(Object.getOwnPropertyDescriptors(myproxyobj));
+
+
+
+        // => Apply trap 
+        // l22applymethod 
+
+        let infoobj = {
+            fullname : 'aung aung',
+            age : 20,
+            city : 'yangon'
+        };
+
+        function myfun(num1,num2,num3){
+            console.log(num1,num2,num3);
+            console.log(this);
+        }   
+
+        // myfun(1,2,3);
+        myfun.apply(infoobj,[1,2,3]); // 1 2 3 // {fullname: 'aung aung', age: 20, city: 'yangon'}
+
+
+        let ourproxy = new Proxy(myfun,{
+            // apply trap 
+
+            apply(target,this_arg,arg_list){
+
+                // console.log(this_arg); //  {fullname: 'aung aung', age: 20, city: 'yangon'}
+                // console.log(arg_list); // [1, 2, 3]
+
+                this_arg = {fullname:"su su"};
+                arg_list[0]++;
+                arg_list[1]++;
+                arg_list[2]++;
+
+                return target.apply(this_arg,arg_list);
+
+            }
+        })
+
+        ourproxy.apply(infoobj,[1,2,3]);
+        ourproxy.apply(infoobj,[10,20,30]); // 11 21 31  // {fullname: 'su su'}
+
+        ourproxy(100,200,300); // 101 201 301 // {fullname: 'su su'}
+
+
+
+        // => Revocable Proxy (a proxy recover to proxy )
+
+        let laptop = {
+            brand : 'dell',
+            model : 'xeon'
+        };
+
+        let laptopproxy = new Proxy(laptop,{
+
+            get(target,prop,receiver){
+                if(prop === "brand"){
+                    return target[prop].toUpperCase();
+                }else{
+                    return 'access denied';
+                }
+            }
+        });
+
+
+        console.log(laptopproxy); // Proxy(Object) {brand: 'dell', model: 'xeon'}
+        console.log(laptopproxy.brand); //  DELL
+
+        let laptoprevocable = Proxy.revocable(laptop,{
+            get(target,prop,receiver){
+                if(prop in target){
+                    return target[prop].toUpperCase();
+                }else{
+                    return 'Access Denied!';
+                }
+            }
+        });
+
+        console.log(laptoprevocable); // {proxy: Proxy(Object), revoke: ƒ}
+
+        let obj5 = laptoprevocable.proxy;
+        console.log(obj5.brand); // DELL 
+        console.log(obj5.model); // XEON
+        console.log(obj5.hello); //  Access Denied!
+
+
+
+        // => constructor trap 
+
+        function My_constructor(greeting){
+            this.greeting = greeting;
+        };
+
+        let myconstructorobj = new My_constructor('hello guys');
+        console.log(myconstructorobj); // My_constructor {greeting: 'hello guys'}
+
+        let proxyconstructor = new Proxy(My_constructor,{
+            // constructor trap 
+
+            construct(target,arg_list,new_target){
+                // return arg_list; // ['bye bye']
+                // return new_target; // Proxy(Function) {length: 1, name: 'My_constructor', arguments: null, caller: null, prototype: {…}}
+
+                // return new target(...arg_list); // My_constructor {greeting: 'bye bye'}
+
+
+            // we can call static prop
+                // new_target.msg = "Have a good day";
+                // return new target(...arg_list);
+
+                new_target.msg = "Have a good day";
+                arg_list[0] = arg_list[0].toUpperCase();
+
+                let addobjvalue = new target(...arg_list);
+                    addobjvalue.name = "Dear Maung Maung";
+
+                    return addobjvalue;
+            }
+        });
+
+        let obj6 = new proxyconstructor('bye bye');
+        console.log(obj6);
+        console.log(obj6.constructor.msg); // Have a good day
+
+
+
+
+    </script>
+    
+</body>
+</html>

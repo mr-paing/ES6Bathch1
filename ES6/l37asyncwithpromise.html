@@ -10,6 +10,88 @@
 
     <script type="text/javascript">
 
+
+        // => Synchronous Javascript 
+                // Note :: Javascript can run One statement at a time 
+
+                console.log('result one');
+                console.log('result two');
+                console.log('result three');
+
+
+
+        // => Asynchronous Javascript 
+
+                console.log('data one');
+                console.log('data two');
+                console.log('data three');
+
+                setTimeout(()=>{
+                    console.log('callbackk is start working now');
+                },5000)
+
+                console.log('data four');
+                console.log('data five');
+                console.log('data six');
+
+
+
+            // Error handling for without async/await (using Promise)
+            fetch('https://jsonplaceholder.typicode.com/todos/1')
+            .then((response)=>{
+                console.log('resolved',response);
+                if(!response.ok){
+                    throw new Error("Network response was not oki sir");
+                }
+
+               return response.json();
+            }).then(data=>{
+                // console.log(data);
+                // console.log(data.id);
+                // console.log(data.title);
+                // console.log(data.body);
+            }).catch(err=>{
+                console.log('rejected' , err);
+            });
+
+
+            // => Error handling Async & await fetch()
+            const getpost = async ()=>{
+                const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+                const data = await response.json();
+
+                return data;
+            };
+
+            getpost().then(data=>{
+                console.log(data);
+                console.log(data.id);
+                console.log(data.title);
+            });
+
+
+
+            async function fetchdata(){
+                try{
+                    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+                    console.log(response);
+
+                    if(!response.ok){
+                        throw new Error("Network response was not oki sir");
+                    }
+
+                    const data = await response.json();
+                    return data;
+                }catch(error){
+                        console.log("There has been a problem with data ",error);
+                    }
+
+            }
+
+            fetchdata();
+
+
+
         const promise = new Promise((resolve,reject)=>{
             // resolve();
             // reject();
@@ -34,14 +116,34 @@
 </body>
 </html>
 <!-- 
-=> Promise (States)
-    (i)  unresolved  (waiting for something to finish)
-    (ii) resolved    (something finished and it all OKI)
-    (iii) reject     (something finished but want bad)
+
+=> Synchronous (Single Threaded)
+statement1 
+statement2 -------------------- database 
+statement3 
+statement4 -------------------- database 
+statement5 
 
 
 
-    Promise -> Request (Everything worked out) -> status (Resolved) -> Callback (then)
-    Promise -> Request (Something bad happened) -> status (Rejected) -> Callback (catch)
+Asynchronous (Single Threaded)
+statement1
+statement2 --------------------- database 
+statement3                        -
+statement4                        -
+statement5                        -
+callback --------------------------
 
      -->
+<!-- 
+     => Differences 
+
+        promise = can become complex and less readable .then() .catch()
+        async / await = looks more like Synchronous code , making it's easier to read and maintain
+
+
+        promise = Error handling is doing using .catch 
+        async / await = Error handling is doing using try......catch blocks 
+                        / more natrually with Asynchronous operation (such as loop and conditionals) 
+    
+    -->

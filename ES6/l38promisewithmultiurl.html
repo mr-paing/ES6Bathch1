@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Async with promise</title>
+    </head>
+    <body>
+        
+
+        <script type="text/javascript">
+
+            // without async & await
+            
+            // url = Uniform Resource Locator
+
+
+            const url = [
+                'https://jsonplaceholder.typicode.com/users',
+                'https://jsonplaceholder.typicode.com/posts',
+                'https://jsonplaceholder.typicode.com/comments'
+            ];
+
+            Promise.all(url.map(url=>{
+                return fetch(url).then(response=>response.json())
+            })).then(results=>{
+                console.log(results); // (3) [Array(10), Array(100), Array(500)]
+                console.warn(results[0]);
+                console.log(results[1]);
+                console.log(results[2]);
+            }).catch(err=>console.log("error = ",err))
+            .finally(()=>console.log('I am working'));
+
+            // using async & await
+
+            // uri = Uniform Resource Identifier
+            const uris = [
+                'https://jsonplaceholder.typicode.com/users',
+                'https://jsonplaceholder.typicode.com/posts',
+                'https://jsonplaceholder.typicode.com/comments'
+            ];
+
+            const getdatas = async function(){
+                // const [users,posts,comments] = await Promise.all(uris.map(uri=>fetch(uri).then(response=>response.json())));
+               
+                // const [users,posts,comments] = await Promise.all(uris.map(uri=>{
+                //     return fetch(uri).then(response=>response.json())
+                // }));
+
+                const [users,posts,comments] = await Promise.all(uris.map(async function(uri){
+                    // const response = await fetch(uri);
+                    // return response.json()
+                }));
+
+                // console.error(users);
+                console.log(posts);
+                console.log(comments);
+            };
+
+            getdatas();
+
+
+            // using async & await with try.....catch
+
+            const routes = [
+                'https://jsonplaceholder.typicode.com/users',
+                'https://jsonplaceholder.typicode.com/posts',
+                'https://jsonplaceholder.typicode.com/comments'
+            ];
+
+            async function getresults(){
+                try{
+                    const [users,posts,comments] = await Promise.all(routes.map(route=>fetch(route).then(response=>response.json())));
+
+                    console.warn(users);
+                    console.log(posts);
+                    console.log(comments);
+                }catch(err){
+                    console.log("error = ",err);
+                }
+            }
+
+            getresults();
+
+
+
+            const getvalues = async function(){
+                try{
+                    const [users,posts,comments] = await Promise.all(routes.map(async route=>{
+                        const response = await fetch(route);
+                        return response.json();
+                    }));
+                    console.error(users);
+                    console.log(posts);
+                    console.log(comments);
+                }catch(err){
+                    console.log("error = ",err);
+                }
+            }
+
+            getvalues();
+
+
+            const getawesomes = async function(){
+                const promisesbyarrays = routes.map(route=>fetch(route));
+                // console.error(promisesbyarrays); // (3) [Promise, Promise, Promise]
+
+                for await(let response of promisesbyarrays){
+                    const datas = await response.json();
+
+                    console.log(datas);
+                }
+            }
+
+            getawesomes();
+
+        </script>
+
+    </body>
+</html>
