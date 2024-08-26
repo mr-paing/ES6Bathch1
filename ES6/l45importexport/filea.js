@@ -35,14 +35,32 @@ console.log('I am file A');
 // myfunone();
 
 
-import * as obj from "./fileb.js"
-console.log(obj);
-console.log(obj.greeting);
-console.log(obj.id);
-obj.myfunone();
+// import * as obj from "./fileb.js"
+// console.log(obj);
+// console.log(obj.greeting);
+// console.log(obj.id);
+// obj.myfunone();
+
+// import {hifi} from "./fileb.js";
+// console.log(hifi);
+
+// import getdatas from "./fileb.js";
+// console.log(getdatas);
 
 
+// import getdats from "./fileb.js";
+// console.log(getdats);
+// console.log(getdats[0]);
+// console.log(getdats[1]);
 
+
+// import getdatas from "./fileb.js";
+// console.log(getdatas.idx);
+// console.log(getdatas.fullname);
+// console.log(getdatas.age);
+
+// import getfun from "./fileb.js";
+// getfun();
 
 
 
